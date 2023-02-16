@@ -3,6 +3,7 @@ using Magic_Villa_API.Datos;
 using Magic_Villa_API.Modelos;
 using Magic_Villa_API.Modelos.DTOS;
 using Magic_Villa_API.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace Magic_Villa_API.Controllers
 {
     [Route("api/Numerovilla")]
     [ApiController]
+    [Authorize]
     public class NumeroVillaController : ControllerBase
     {
         private readonly ILogger<NumeroVillaController> _logger;

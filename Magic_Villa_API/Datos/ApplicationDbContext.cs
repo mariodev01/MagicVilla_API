@@ -8,7 +8,7 @@ namespace Magic_Villa_API.Datos
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options)
         {
         }
-
+        public DbSet<Usuario> usuarios { get; set; }
         public DbSet<Villa> villas { get; set; }
         public DbSet<NumeroVilla> numeroVillas { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

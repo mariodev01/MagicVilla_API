@@ -3,6 +3,7 @@ using Magic_Villa_API.Datos;
 using Magic_Villa_API.Modelos;
 using Magic_Villa_API.Modelos.DTOS;
 using Magic_Villa_API.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -30,6 +31,7 @@ namespace Magic_Villa_API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetVillas()
         {
 
@@ -59,6 +61,7 @@ namespace Magic_Villa_API.Controllers
         }
 
         [HttpGet("{id:int}",Name ="GetVilla")]
+        [Authorize]
         public async Task<ActionResult<ApiResponse>> GetVilla(int id)
         {
             try
@@ -90,6 +93,7 @@ namespace Magic_Villa_API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public async Task<ActionResult<ApiResponse>> CrearVilla([FromBody] VillaCreacionDto villa)
         {
             try
@@ -128,6 +132,7 @@ namespace Magic_Villa_API.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult<ApiResponse>> DeleteVilla(int id) 
         {
             try
@@ -160,6 +165,7 @@ namespace Magic_Villa_API.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateVilla(int id, VillaActualizacionDto villaDto)
         {
             if (villaDto == null|| villaDto.Id != id)
@@ -178,6 +184,7 @@ namespace Magic_Villa_API.Controllers
         }
 
         [HttpPatch("{id:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdatePartialVilla(int id, JsonPatchDocument<VillaActualizacionDto> jsonPatch)
         {
             if (jsonPatch == null || id == 0)
